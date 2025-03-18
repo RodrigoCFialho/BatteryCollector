@@ -1,0 +1,14 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/rodri/Documents/GitHub/BatteryCollector/BatteryCollector/Content/Materials/M_ElectricArc.uasset",
+				"C:/Users/rodri/Documents/GitHub/BatteryCollector/BatteryCollector/Content/FX/P_EletricArcs.uasset",
+				"C:/Users/rodri/Documents/GitHub/BatteryCollector/BatteryCollector/Content/Blueprints/Battery_BP.uasset"
+			]
+		}
+	]
+}

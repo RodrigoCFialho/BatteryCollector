@@ -20,7 +20,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	/** Return the mesh for the pickup */
+	/* Return the mesh for the pickup */
 	FORCEINLINE UStaticMeshComponent* GetMesh() const { return PickupMesh; }
 
 	/** Return whether or not the pickup is active */
@@ -31,13 +31,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Pickup")
 	void SetActive(bool NewPickupState);
 
+	/** Function to call when the pickup is collected */
+	UFUNCTION(BlueprintNativeEvent)
+	void WasCollected();
+	virtual void WasCollected_Implementation();
+
+
 private:
-	/** Static mesh to represent the pickup in the level */
+	/* Static mesh to represent the pickup in the level */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pickup", meta = (allowprivateaccess = "true"))
 	UStaticMeshComponent* PickupMesh;
 
 protected:
-	/** True when the pickup can be used, and false when the pickup is deactivated */
+	/* True when the pickup can be used, and false when the pickup is deactivated */
 	bool bIsActive;
 
 };

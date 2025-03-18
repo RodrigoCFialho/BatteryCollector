@@ -4,12 +4,15 @@
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Pickup.h"
+#include "BatteryPickup.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -50,8 +53,44 @@ ABatteryCollectorCharacter::ABatteryCollectorCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	// Create the collection sphere
+	CollectionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollectionSphere"));
+	CollectionSphere->SetupAttachment(RootComponent);
+	CollectionSphere->SetSphereRadius(200.f);
+
+	// set a base power level for the character
+	InitialPower = 2000.f;
+	CharacterPower = InitialPower;
+
+	// set the dependence of the speed on the power level
+	SpeedFactor = 0.75f;
+	BaseSpeed = 10.f;
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+}
+
+// Reports starting power
+float ABatteryCollectorCharacter::GetInitialPower()
+{
+	return InitialPower;
+}
+
+// Reports current power
+float ABatteryCollectorCharacter::GetCurrentPower()
+{
+	return CharacterPower;
+}
+
+// Called whenever power is increased or decreased
+void ABatteryCollectorCharacter::UpdatePower(float PowerChange)
+{
+	// change power
+	CharacterPower = CharacterPower + PowerChange;
+	// change speed based on power
+	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed + SpeedFactor * CharacterPower;
+	// call visual effect
+	PowerChangeEffect();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -85,6 +124,9 @@ void ABatteryCollectorCharacter::SetupPlayerInputComponent(UInputComponent* Play
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABatteryCollectorCharacter::Look);
+
+		// Collect
+		EnhancedInputComponent->BindAction(CollectAction, ETriggerEvent::Triggered, this, &ABatteryCollectorCharacter::CollectPickups);
 	}
 	else
 	{
@@ -125,5 +167,44 @@ void ABatteryCollectorCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void ABatteryCollectorCharacter::CollectPickups()
+{
+	// Get all overlapping Actors and store them in an array
+	TArray<AActor*> CollectedActors;
+	CollectionSphere->GetOverlappingActors(CollectedActors);
+
+	// keep track of the collected power
+	float CollectedPower = 0.f;
+
+	// For each actor we collected
+	for (int32 iCollected = 0; iCollected < CollectedActors.Num(); ++iCollected)
+	{
+		// Cast the actor to APickup
+		APickup* const TestPickup = Cast<APickup>(CollectedActors[iCollected]);
+		// If the cast is successfull and the pickup is valid and active
+		if (TestPickup && IsValid(TestPickup) && TestPickup->IsActive())
+		{
+			// Call pickup's WasCollected function
+			TestPickup->WasCollected();
+
+			// Check to see if the pickup is also a battery
+			ABatteryPickup* const TestBattery = Cast<ABatteryPickup>(TestPickup);
+			if (TestBattery)
+			{
+				// increase the collected power
+				CollectedPower += TestBattery->GetPower();
+			}
+
+			// Deactivate the pickup
+			TestPickup->SetActive(false);
+		}
+	}
+
+	if (CollectedPower > 0)
+	{
+		UpdatePower(CollectedPower);
 	}
 }

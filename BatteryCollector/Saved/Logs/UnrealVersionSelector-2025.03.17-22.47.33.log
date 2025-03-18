@@ -1,0 +1,72 @@
+Log started at 03/17/2025 22:47:34 (2025-03-17T22:47:34Z)
+No config file at C:\ProgramData\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\rodri\AppData\Local\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+No config file at C:\Users\rodri\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Configuration will be read from:
+  C:\Users\rodri\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Log file: C:\Users\rodri\Documents\GitHub\BatteryCollector\BatteryCollector\Saved\Logs\UnrealVersionSelector-2025.03.17-22.47.33.log
+
+Setting temp directory to 'C:\Users\rodri\AppData\Local\Temp\UnrealBuildTool\f2d894e7'
+    Registering build platform: UnrealBuildTool.AndroidPlatformFactory
+    Registering build platform: UnrealBuildTool.IOSPlatformFactory
+    Registering build platform: UnrealBuildTool.LinuxPlatformFactory
+    Registering build platform: UnrealBuildTool.MacPlatformFactory
+    Registering build platform: UnrealBuildTool.TVOSPlatformFactory
+    Registering build platform: UnrealBuildTool.WindowsPlatformFactory
+Unable to find valid SDK(s) for Win64:
+  Found Sdk Version, MinRequired=10.0.19041.0, MaxRequired=10.9.99999.0.
+  Found AutoSdk Version, Required=10.0.22621.0.
+        Registering build platform: Win64 - buildable: False
+    Registering build platform: UnrealBuildTool.VisionOSPlatformFactory
+Log file: C:\Users\rodri\AppData\Local\UnrealBuildTool\Log_GPF.txt
+Resolved project argument C:/Users/rodri/Documents/GitHub/BatteryCollector/BatteryCollector/BatteryCollector.uproject to C:\Users\rodri\Documents\GitHub\BatteryCollector\BatteryCollector\BatteryCollector.uproject
+Registering project generator UnrealBuildTool.AndroidProjectGenerator for Android
+Skipping project file generator registration for Android due to no valid BuildPlatform.
+Registering project generator UnrealBuildTool.IOSProjectGenerator for IOS
+Skipping project file generator registration for IOS due to no valid BuildPlatform.
+Registering project generator UnrealBuildTool.LinuxProjectGenerator for Linux
+Skipping project file generator registration for Linux due to no valid BuildPlatform.
+Registering project generator UnrealBuildTool.LinuxProjectGenerator for LinuxArm64
+Skipping project file generator registration for LinuxArm64 due to no valid BuildPlatform.
+Registering project generator UnrealBuildTool.MacProjectGenerator for Mac
+Skipping project file generator registration for Mac due to no valid BuildPlatform.
+Registering project generator UnrealBuildTool.TVOSProjectGenerator for TVOS
+Skipping project file generator registration for TVOS due to no valid BuildPlatform.
+Registering project generator UnrealBuildTool.WindowsProjectGenerator for Win64
+Registering project generator UnrealBuildTool.VisionOSProjectGenerator for VisionOS
+Skipping project file generator registration for VisionOS due to no valid BuildPlatform.
+
+---   SDK INFO START   ---
+
+Some Platforms were skipped due to invalid SDK setup: Win64.
+See the log file for detailed information
+
+---   SDK INFO END   ---
+
+
+Generating VisualStudio project files:
+Discovering modules, targets and source code for project...
+Found VisualStudio2022 installation: C:\Program Files\Microsoft Visual Studio\2022\Community (Product=Microsoft.VisualStudio.Product.Community, Version=17.12.35527.113)
+Detected supported platforms: Win64
+Skipping C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\BuildRules\UE5Rules.dll: File is installed
+Skipping C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\BuildRules\UE5ProgramRules.dll: File is installed
+Visual Studio 2022 is installed, but is out of date or missing a valid C++ toolchain (minimum version 14.38.33130, preferred version 14.38.33130). Please update Visual Studio 2022 to 17.8 or later and verify that the "MSVC v143 - VS 2022 C++ x64/x86 build tools (v14.38-17.8)" component is selected in the Visual Studio 2022 installation options.
+Total execution time: 1.13 seconds
+Visual Studio 2022 x64 must be installed in order to build this target.
+BuildException: Visual Studio 2022 x64 must be installed in order to build this target.
+   at UnrealBuildTool.VCEnvironmentParameters..ctor(WindowsCompiler Compiler, WindowsCompiler ToolChain, UnrealTargetPlatform Platform, UnrealArch Architecture, String CompilerVersion, String ToolchainVersion, String WindowsSdkVersion, String SuppliedSdkDirectoryForVersion, Boolean bUseCPPWinRT, Boolean bAllowClangLinker, ILogger Logger) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\VCEnvironment.cs:line 465
+   at UnrealBuildTool.VCEnvironment.Create(WindowsCompiler Compiler, WindowsCompiler ToolChain, UnrealTargetPlatform Platform, UnrealArch Architecture, String CompilerVersion, String ToolchainVersion, String WindowsSdkVersion, String SuppliedSdkDirectoryForVersion, Boolean bUseCPPWinRT, Boolean bAllowClangLinker, ILogger Logger) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\VCEnvironment.cs:line 384
+   at UnrealBuildTool.WindowsPlatform.CreateVCEnvironment(TargetRules Target) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\UEBuildWindows.cs:line 1137
+   at UnrealBuildTool.WindowsPlatform.ValidateTarget(TargetRules Target) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\UEBuildWindows.cs:line 1316
+   at UnrealBuildTool.RulesAssembly.CreateTargetRulesInstance(String TypeName, TargetInfo TargetInfo, ILogger Logger, Boolean IsTestTarget, TargetRulesValidationOptions ValidationOptions) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\System\RulesAssembly.cs:line 767
+   at UnrealBuildTool.RulesAssembly.CreateTargetRules(String TargetName, UnrealTargetPlatform Platform, UnrealTargetConfiguration Configuration, UnrealArchitectures Architectures, FileReference ProjectFile, CommandLineArguments Arguments, ILogger Logger, Boolean IsTestTarget, TargetRulesValidationOptions ValidationOptions, UnrealIntermediateEnvironment IntermediateEnvironment) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\System\RulesAssembly.cs:line 880
+   at UnrealBuildTool.ProjectFileGenerator.AddProjectsForAllTargets(PlatformProjectGeneratorCollection PlatformProjectGenerators, List`1 AllGames, List`1 AllTargetFiles, String[] Arguments, List`1 EngineProjects, List`1 GameProjects, Dictionary`2 ProjectFileToUProjectFile, Dictionary`2 ProgramProjects, Dictionary`2 RulesAssemblies, ILogger Logger) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\ProjectFiles\ProjectFileGenerator.cs:line 2799
+   at UnrealBuildTool.ProjectFileGenerator.GenerateProjectFiles(PlatformProjectGeneratorCollection PlatformProjectGenerators, String[] Arguments, Boolean bCacheDataForEditor, ILogger Logger) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\ProjectFiles\ProjectFileGenerator.cs:line 1048
+   at UnrealBuildTool.GenerateProjectFilesMode.ExecuteAsync(CommandLineArguments Arguments, ILogger Logger) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\Modes\GenerateProjectFilesMode.cs:line 260
+   at UnrealBuildTool.UnrealBuildTool.Main(String[] ArgumentsArray) in D:\build\++UE5\Sync\Engine\Saved\CsTools\Engine\Source\Programs\UnrealBuildTool\UnrealBuildTool.cs:line 687
+WriteFileIfChanged() wrote 2 changed files of 2 requested writes.
+Timeline:
+
+[ 0.000]
+[ 0.000](+1.155) <unknown>
+[ 1.155]
